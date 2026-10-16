@@ -13,5 +13,6 @@ func main() {
 		if i%3 != 0 && i%5 != 0 {
 			fmt.Print(i)
 		}
+		fmt.Println()
 	}
 }
