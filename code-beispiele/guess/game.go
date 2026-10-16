@@ -2,34 +2,40 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
+	"math/rand/v2"
 )
 
-func ReadNumber() int {
-	fmt.Print("Rate eine Zahl: ")
-	var n int
-	fmt.Scan(&n)
-	return n
-}
+func main() {
+	// alternativ: var secret int = ...
+	secret := (rand.IntN(100) + 1)
+	//secret := 42
 
-func GuessingGame() {
-	my_number := rand.Intn(101) - 50
-	for n := 0; n < 3; n++ {
-		guess := ReadNumber()
-		if NumberGood(guess, my_number) {
-			fmt.Println("Richtig geraten :-)")
+	//for i := 0; i < 3; i = i + 1 {
+	for range 6 {
+		fmt.Print("Rate eine Zahl: ")
+
+		var input int
+		fmt.Scanln(&input)
+
+		if check_input(secret, input) { // prüft, ob check_input true geliefert hat.
 			return
-		} else {
-			fmt.Println("Falsch geraten (Muhaha)")
 		}
 	}
-	fmt.Println("Zu viele falsche Zahlen :-(")
+
+	fmt.Println("Game Over")
 }
 
-func NumberGood(g, e int) bool {
-	return g == e
-}
+func check_input(secret int, input int) bool {
+	if input < secret {
+		fmt.Println("Deine Zahl ist zu klein.")
+		return false
+	}
 
-func main() {
-	GuessingGame()
+	if input > secret {
+		fmt.Println("Deine Zahl ist zu groß.")
+		return false
+	}
+
+	fmt.Println("Richtig geraten")
+	return true
 }
